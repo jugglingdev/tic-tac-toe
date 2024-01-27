@@ -1,15 +1,17 @@
 import './App.css';
 import { useState } from 'react';
 
-function Square({ value, onSquareClick }) {
+function Square({ value, onSquareClick, isWinningSquare }) {
+  const squareClassName = isWinningSquare ? 'square winning-square' : 'square';
+
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button className={squareClassName} onClick={onSquareClick}>
       {value}
     </button>
   );
 }
 
-function renderBoardRows(squares, onSquareClick) {
+function renderBoardRows(squares, onSquareClick, winningLine) {
   const board = [];
 
   for (let row = 0; row < 3; row++) {
@@ -18,7 +20,12 @@ function renderBoardRows(squares, onSquareClick) {
     for (let col = 0; col < 3; col++) {
       const index = row * 3 + col;
       squaresInRow.push(
-        <Square key={index} value={squares[index]} onSquareClick={() => onSquareClick(index)} />
+        <Square 
+          key={index} 
+          value={squares[index]} 
+          onSquareClick={() => onSquareClick(index)} 
+          isWinningSquare={winningLine && winningLine.includes(index)}
+        />
       );
     }
 
@@ -33,6 +40,7 @@ function renderBoardRows(squares, onSquareClick) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
+  const [winningLine, setWinningLine] = useState(null);
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -47,14 +55,22 @@ function Board({ xIsNext, squares, onPlay }) {
       nextSquares[i] = 'O';
     }
 
+    setWinningLine(null);
+
+    const winnerInfo = calculateWinner(nextSquares);
+  
+    if (winnerInfo) {
+      setWinningLine(winnerInfo.line);
+    }
+
     onPlay(nextSquares);
   }
 
-  const winner = calculateWinner(squares);
+  const winnerInfo = calculateWinner(squares);
   let status;
 
-  if (winner) {
-    status = `${winner} wins!`;
+  if (winnerInfo) {
+    status = `${winnerInfo.winner} wins!`;
   } else {
     status = `It's ${(xIsNext ? 'X' : 'O')}'s turn`;
   }
@@ -62,7 +78,7 @@ function Board({ xIsNext, squares, onPlay }) {
   return (
     <>
       <div className='status'>{status}</div>
-      {renderBoardRows(squares, handleClick)}
+      {renderBoardRows(squares, handleClick, winningLine)}
     </>
   );
 }
@@ -125,7 +141,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], line: [a, b, c] };
     }
   }
   return null;
