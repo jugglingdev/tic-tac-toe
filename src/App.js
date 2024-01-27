@@ -71,6 +71,8 @@ function Board({ xIsNext, squares, onPlay }) {
 
   if (winnerInfo) {
     status = `${winnerInfo.winner} wins!`;
+  } else if (squares.every((square) => square)) {
+    status = `It's a tie`;
   } else {
     status = `It's ${(xIsNext ? 'X' : 'O')}'s turn`;
   }
