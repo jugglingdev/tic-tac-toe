@@ -9,7 +9,8 @@ body {
 }
 
 h1 {
-  margin-top: 0;
+  margin: 50px auto;
+  text-align: center;
   font-size: 22px;
 }
 
@@ -81,11 +82,31 @@ body {
   margin-bottom: 10px;
 }
 .game {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .game-info {
   margin-left: 20px;
 }
 
+li {
+  list-style-type: none;
+}
+
+li > button {
+  margin: 4px;
+  padding: 4px 8px;
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+li > button:hover {
+  background-color: blanchedalmond;
+}
