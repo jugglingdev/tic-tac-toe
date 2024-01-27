@@ -14,39 +14,6 @@ h1 {
   font-size: 42px;
 }
 
-h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-h4 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
-}
-
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-inline-start: 20px;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -93,12 +60,16 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .game-info {
   margin-top: 0;
-  margin-left: 20px;
+}
+
+ol {
+  padding: 0;
 }
 
 li {
