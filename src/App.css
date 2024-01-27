@@ -120,3 +120,7 @@ li > button {
 li > button:hover {
   background-color:  rgb(208, 255, 0);
 }
+
+.active-move {
+  background-color:  rgb(208, 255, 0);
+}
