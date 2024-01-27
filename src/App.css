@@ -72,6 +72,10 @@ body {
   width: 64px;
 }
 
+.winning-square {
+  background: rgb(208, 255, 0);
+}
+
 .board-row:after {
   clear: both;
   content: '';
@@ -114,5 +118,5 @@ li > button {
 }
 
 li > button:hover {
-  background-color: blanchedalmond;
+  background-color:  rgb(208, 255, 0);
 }
